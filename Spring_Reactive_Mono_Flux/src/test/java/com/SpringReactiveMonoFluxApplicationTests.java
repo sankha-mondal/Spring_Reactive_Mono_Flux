@@ -16,7 +16,7 @@ class SpringReactiveMonoFluxApplicationTests {
 
 	// ================================================================================================================
 
-	// ====== : Theory | Working | Example : =======
+	// ======== : Theory | Working | Example : =======
 
 	@Test
 	void testMono() {
@@ -67,38 +67,38 @@ class SpringReactiveMonoFluxApplicationTests {
 				.delayElements(Duration.ofSeconds(2)).log().map(data -> data.toUpperCase())
 				.subscribe(new Subscriber<String>() {
 
-					private long count = 0;
-					private Subscription subscription;
+				private long count = 0;
+				private Subscription subscription;
 
-					@Override
-					public void onSubscribe(Subscription subscription) {
-						this.subscription = subscription;
-						subscription.request(3); // no of elements in one batch | How many requests Subscribe ready to handle
-						// subscription.request(Long.MAX_VALUE);
+				@Override
+				public void onSubscribe(Subscription subscription) {
+					this.subscription = subscription;
+					subscription.request(3); // no of elements in one batch | How many requests Subscribe ready to handle
+					// subscription.request(Long.MAX_VALUE);
+				}
+
+				@Override
+				public void onNext(String data) {
+					count++;
+					if (count >= 3) {
+						count = 0;
+						subscription.request(3);
 					}
+					System.out.println(data);
+				}
 
-					@Override
-					public void onNext(String data) {
-						count++;
-						if (count >= 3) {
-							count = 0;
-							subscription.request(3);
-						}
-						System.out.println(data);
-					}
+				@Override
+				public void onError(Throwable t) {
+					t.printStackTrace();
+				}
 
-					@Override
-					public void onError(Throwable t) {
-						t.printStackTrace();
-					}
+				@Override
+				public void onComplete() {
+					System.out.println("Completely Done...");
+				}
+			});
 
-					@Override
-					public void onComplete() {
-						System.out.println("Completely Done...");
-					}
-				});
-
-		Thread.sleep(20000); // because our test execution will not wait for 2 sec.It's called Unblocking nature
+		Thread.sleep(20000); // because our test execution will not wait for 2 sec. It's called Unblocking nature
 	}
 
 }
