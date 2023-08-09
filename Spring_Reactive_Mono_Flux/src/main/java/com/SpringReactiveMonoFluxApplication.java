@@ -10,4 +10,9 @@ public class SpringReactiveMonoFluxApplication {
 		SpringApplication.run(SpringReactiveMonoFluxApplication.class, args);
 	}
 
+	/*
+	 *	Dependencies: Spring Reactive Web
+	 * 	Nothing is here, everything are in test/java/com
+	 */
+
 }
