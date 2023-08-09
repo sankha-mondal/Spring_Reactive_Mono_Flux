@@ -11,8 +11,8 @@ public class SpringReactiveMonoFluxApplication {
 	}
 
 	/*
-	 *	Dependencies: Spring Reactive Web
-	 * 	Nothing is here, everything are in test/java/com
+	 *	Dependencies: Spring Reactive Web, please check pom.xml once
+	 * 	Nothing is here, everything is in test/java/com
 	 */
 
 }
